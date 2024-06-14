@@ -22,6 +22,7 @@ namespace StatePattern.Enemy
             SubscribeToEvents();
         }
 
+
         private void InitializeVariables() => activeEnemies = new List<EnemyController>();
 
         private void SubscribeToEvents() => GameService.Instance.EventService.OnLevelSelected.AddListener(SpawnEnemies);
