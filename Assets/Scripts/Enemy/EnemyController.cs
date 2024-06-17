@@ -1,6 +1,7 @@
 ﻿using StatePattern.Enemy.Bullet;
 using StatePattern.Main;
 using StatePattern.Player;
+using StatePattern.StateMachine;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -69,6 +70,7 @@ namespace StatePattern.Enemy
             enemyView.PlayShootingEffect();
             GameService.Instance.SoundService.PlaySoundEffects(Sound.SoundType.ENEMY_SHOOT);
             BulletController bullet = new BulletController(enemyView.transform, enemyScriptableObject.BulletData);
+
         }
 
         public void SetState(EnemyState stateToSet) => currentState = stateToSet;
@@ -78,6 +80,8 @@ namespace StatePattern.Enemy
         public virtual void PlayerExitedRange() { }
 
         public virtual void UpdateEnemy() { }
+
+        
     }
 
     public enum EnemyState

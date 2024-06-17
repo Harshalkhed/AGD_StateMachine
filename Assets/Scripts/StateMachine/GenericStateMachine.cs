@@ -1,6 +1,7 @@
 ﻿using StatePattern.Enemy;
 using System.Collections.Generic;
 
+
 namespace StatePattern.StateMachine
 {
     public class GenericStateMachine<T> where T : EnemyController
