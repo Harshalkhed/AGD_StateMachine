@@ -3,6 +3,7 @@ using StatePattern.StateMachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.VersionControl.Asset;
 
 namespace StatePattern.Enemy
 {
@@ -14,7 +15,7 @@ namespace StatePattern.Enemy
         {
             enemyView.SetController(this);
             CreateStateMachine();
-            stateMachine.ChangeState(States.IDLE);
+            stateMachine.ChangeState(StateMachine.States.IDLE);
         }
 
         private void CreateStateMachine() => stateMachine = new PatrolManStateMachine(this);
@@ -30,9 +31,9 @@ namespace StatePattern.Enemy
         public override void PlayerEnteredRange(PlayerController targetToSet)
         {
             base.PlayerEnteredRange(targetToSet);
-            stateMachine.ChangeState(States.CHASING);
+            stateMachine.ChangeState(StateMachine.States.CHASING);
         }
 
-        public override void PlayerExitedRange() => stateMachine.ChangeState(States.IDLE);
+        public override void PlayerExitedRange() => stateMachine.ChangeState(StateMachine.States.IDLE);
     }
 }

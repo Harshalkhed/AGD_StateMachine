@@ -1,18 +1,34 @@
-using System.Collections;
+using StatePattern.Enemy;
 using System.Collections.Generic;
-using UnityEngine;
+using static UnityEditor.VersionControl.Asset;
 
-public class GenericStateMachine : MonoBehaviour
+namespace StatePattern.StateMachine
 {
-    // Start is called before the first frame update
-    void Start()
+    public class GenericStateMachine<T> where T : EnemyController
     {
-        
-    }
+        protected T Owner;
+        protected IState currentState;
+        protected Dictionary<States, IState> States = new Dictionary<States, IState>();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public GenericStateMachine(T Owner) => this.Owner = Owner;
+
+        public void Update() => currentState?.Update();
+
+        protected void ChangeState(IState newState)
+        {
+            currentState?.OnStateExit();
+            currentState = newState;
+            currentState?.OnStateEnter();
+        }
+
+        public void ChangeState(States newState) => ChangeState(States[newState]);
+
+        protected void SetOwner()
+        {
+            foreach (IState state in States.Values)
+            {
+                state.Owner = Owner;
+            }
+        }
     }
 }
